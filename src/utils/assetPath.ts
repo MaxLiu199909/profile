@@ -3,11 +3,15 @@ export const assetPath = (path: string): string => {
     return path;
   }
 
-  const projectBase = '/username.github.io';
-  const isProjectSitePath =
-    window.location.pathname === projectBase ||
-    window.location.pathname.startsWith(`${projectBase}/`);
-  const runtimeBasePath = isProjectSitePath ? `${projectBase}/` : '/';
+  const runtimeBasePath = (() => {
+    if (!window.location.hostname.endsWith('github.io')) {
+      return '/';
+    }
+
+    const [repoSegment] = window.location.pathname.split('/').filter(Boolean);
+    return repoSegment ? `/${repoSegment}/` : '/';
+  })();
+
   const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
   return `${runtimeBasePath}${normalizedPath}`;
 };

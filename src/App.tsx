@@ -7,14 +7,18 @@ import ProjectFour from './pages/ProjectFour';
 import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
-  // GitHub Pages project site is served under /username.github.io
-  const projectBase = '/username.github.io';
-  const routerBasename =
-    import.meta.env.DEV
-      ? '/'
-      : window.location.pathname.startsWith(projectBase)
-        ? projectBase
-        : '/';
+  const routerBasename = (() => {
+    if (import.meta.env.DEV) {
+      return '/';
+    }
+
+    if (!window.location.hostname.endsWith('github.io')) {
+      return '/';
+    }
+
+    const [repoSegment] = window.location.pathname.split('/').filter(Boolean);
+    return repoSegment ? `/${repoSegment}` : '/';
+  })();
 
   return (
     <LanguageProvider>
