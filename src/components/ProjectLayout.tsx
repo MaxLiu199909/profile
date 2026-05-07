@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectNavBar from './ProjectNavBar';
 import { useLanguage } from '../context/LanguageContext';
+import { assetPath } from '../utils/assetPath';
 
 interface ProjectLayoutProps {
   children: React.ReactNode;
@@ -18,6 +19,10 @@ interface ProjectLayoutProps {
 
 const ProjectLayout = ({ children, title, description, projectNumber, backgroundImage }: ProjectLayoutProps) => {
   const { language } = useLanguage();
+  const defaultBackgroundImage = CSS.supports('(background-image: -webkit-image-set(url("") 1x))')
+    ? assetPath(`images/projects/project${projectNumber}.webp`)
+    : assetPath(`images/projects/project${projectNumber}.jpg`);
+  const resolvedBackgroundImage = backgroundImage ? assetPath(backgroundImage) : defaultBackgroundImage;
 
   return (
     <div className="min-h-screen bg-white">
@@ -27,12 +32,7 @@ const ProjectLayout = ({ children, title, description, projectNumber, background
       <div 
         className="relative min-h-[80vh] flex items-center"
         style={{
-          backgroundImage: `url(${
-            backgroundImage || 
-            (CSS.supports('(background-image: -webkit-image-set(url("") 1x))') 
-              ? `/images/projects/project${projectNumber}.webp`
-              : `/images/projects/project${projectNumber}.jpg`)
-          })`,
+          backgroundImage: `url(${resolvedBackgroundImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'

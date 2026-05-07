@@ -1,5 +1,6 @@
 import Section from './Section';
 import { useLanguage } from '../context/LanguageContext';
+import { assetPath } from '../utils/assetPath';
 
 const About = () => {
   const { language } = useLanguage();
@@ -16,12 +17,12 @@ const About = () => {
         <div className="relative aspect-[3/4] md:sticky md:top-24">
           <picture>
             <source
-              srcSet="/images/profile.webp"
+              srcSet={assetPath('images/profile.webp')}
               type="image/webp"
               sizes="(min-width: 768px) 50vw, 100vw"
             />
             <img 
-              src="/images/profile.jpg"
+              src={assetPath('images/profile.jpg')}
               alt={language === 'en' ? 'Profile' : '个人照片'}
               className="rounded-xl shadow-lg w-full h-full object-cover object-center hover:scale-[1.02] transition-transform duration-300"
               style={{ objectPosition: '50% 15%' }}

@@ -4,57 +4,69 @@ import { SiXiaohongshu } from 'react-icons/si';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import WeChatModal from './WeChatModal';
 import { useLanguage } from '../context/LanguageContext';
+import { assetPath } from '../utils/assetPath';
 
 const backgroundImages = [
   {
     webp: {
-      small: "/images/backgrounds/bg1-small.webp",
-      medium: "/images/backgrounds/bg1-medium.webp",
-      large: "/images/backgrounds/bg1.webp"
+      small: "bg1-small.webp",
+      medium: "bg1-medium.webp",
+      large: "bg1.webp"
     },
     jpg: {
-      small: "/images/backgrounds/bg1-small.jpg",
-      medium: "/images/backgrounds/bg1-medium.jpg",
-      large: "/images/backgrounds/bg1.jpg"
+      small: "bg1-small.jpg",
+      medium: "bg1-medium.jpg",
+      large: "bg1.jpg"
     }
   },
   {
     webp: {
-      small: "/images/backgrounds/bg2-small.webp",
-      medium: "/images/backgrounds/bg2-medium.webp",
-      large: "/images/backgrounds/bg2.webp"
+      small: "bg2-small.webp",
+      medium: "bg2-medium.webp",
+      large: "bg2.webp"
     },
     jpg: {
-      small: "/images/backgrounds/bg2-small.jpg",
-      medium: "/images/backgrounds/bg2-medium.jpg",
-      large: "/images/backgrounds/bg2.jpg"
+      small: "bg2-small.jpg",
+      medium: "bg2-medium.jpg",
+      large: "bg2.jpg"
     }
   },
   {
     webp: {
-      small: "/images/backgrounds/bg3-small.webp",
-      medium: "/images/backgrounds/bg3-medium.webp",
-      large: "/images/backgrounds/bg3.webp"
+      small: "bg3-small.webp",
+      medium: "bg3-medium.webp",
+      large: "bg3.webp"
     },
     jpg: {
-      small: "/images/backgrounds/bg3-small.jpg",
-      medium: "/images/backgrounds/bg3-medium.jpg",
-      large: "/images/backgrounds/bg3.jpg"
+      small: "bg3-small.jpg",
+      medium: "bg3-medium.jpg",
+      large: "bg3.jpg"
     }
   },
   {
     webp: {
-      small: "/images/backgrounds/bg4-small.webp",
-      medium: "/images/backgrounds/bg4-medium.webp",
-      large: "/images/backgrounds/bg4.webp"
+      small: "bg4-small.webp",
+      medium: "bg4-medium.webp",
+      large: "bg4.webp"
     },
     jpg: {
-      small: "/images/backgrounds/bg4-small.jpg",
-      medium: "/images/backgrounds/bg4-medium.jpg",
-      large: "/images/backgrounds/bg4.jpg"
+      small: "bg4-small.jpg",
+      medium: "bg4-medium.jpg",
+      large: "bg4.jpg"
     }
   }
-];
+].map((image) => ({
+  webp: {
+    small: assetPath(`images/backgrounds/${image.webp.small}`),
+    medium: assetPath(`images/backgrounds/${image.webp.medium}`),
+    large: assetPath(`images/backgrounds/${image.webp.large}`)
+  },
+  jpg: {
+    small: assetPath(`images/backgrounds/${image.jpg.small}`),
+    medium: assetPath(`images/backgrounds/${image.jpg.medium}`),
+    large: assetPath(`images/backgrounds/${image.jpg.large}`)
+  }
+}));
 
 const Hero = () => {
   const [isWeChatModalOpen, setIsWeChatModalOpen] = useState(false);
@@ -343,7 +355,7 @@ const Hero = () => {
         isOpen={isWeChatModalOpen}
         onClose={() => setIsWeChatModalOpen(false)}
         wechatId="Max_Deze"
-        qrCodeUrl="/wechat-qr_副本.jpg"
+        qrCodeUrl={assetPath('wechat-qr_副本.jpg')}
       />
     </section>
   );
