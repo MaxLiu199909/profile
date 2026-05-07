@@ -7,9 +7,18 @@ import ProjectFour from './pages/ProjectFour';
 import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
+  // GitHub Pages project site is served under /username.github.io
+  const projectBase = '/username.github.io';
+  const routerBasename =
+    import.meta.env.DEV
+      ? '/'
+      : window.location.pathname.startsWith(projectBase)
+        ? projectBase
+        : '/';
+
   return (
     <LanguageProvider>
-      <Router>
+      <Router basename={routerBasename}>
         <div className="min-h-screen bg-white">
           <Routes>
             <Route path="/" element={<Home />} />
